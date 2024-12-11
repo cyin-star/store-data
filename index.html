@@ -23,43 +23,6 @@
   <div id="idk"></div>
 
   <script>
-    function openAndEmbed(url) {
-      const newWindow = window.open('about:blank', '_blank');
-
-      // Check if the window was successfully opened
-      if (newWindow) {
-        // Write the HTML content with an embed tag that covers the entire page
-        newWindow.document.write(`
-          <html>
-          <head>
-            <title>Embedded Content</title>
-            <style>
-              body, html {
-                margin: 0;
-                padding: 0;
-                height: 100%;
-                overflow: hidden;
-              }
-              iframe {
-                position: absolute;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-              }
-            </style>
-          </head>
-          <body>
-            <iframe src="${url}"/>
-          </body>
-          </html>
-        `);
-        newWindow.document.close(); // Close the document to finish writing
-      } else {
-        alert('Popup blocked! Please allow popups for this site.');
-      }
-    }
-
     const dataForm = document.getElementById("dataForm");
     const da = document.getElementById("DA");
     const idk = document.getElementById("idk");
@@ -70,7 +33,8 @@
       const name = document.getElementById("name").value;
       const message = document.getElementById("message").value;
       const url = document.getElementById("url").value;
-      da.innerHTML = `calculating...`;
+      const username = localStorage.getItem('username');
+      da.innerHTML = `Storing...`;
       
       const links =['https://meeatchicken.pythonanywhere.com/submit']; // Sends the data to the Python server to get an output
 
