@@ -20,6 +20,9 @@
   <div id="idk"></div>
 
   <script>
+    if (localStorage.getItem("username")) { 
+      window.location.href="https://store-data.netlify.app/register";
+    };
     const dataForm = document.getElementById("dataForm");
     const da = document.getElementById("DA");
     const idk = document.getElementById("idk");
