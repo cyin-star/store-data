@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>I don't have a good title</title>
+  <title>IDK</title>
 </head>
 <body>
 
@@ -74,10 +74,9 @@
 
 
 
-    document.querySelector("button").addEventListener("click", () => {
-      event.preventDefault(); // Prevent default form submission
-      localStorage.clear();
-      window.location.href="https://store-data.netlify.app";
+document.querySelector("button[type='button']").addEventListener("click", (event) => { 
+  event.preventDefault();
+  window.location.href = "https://store-data.netlify.app";
     });
   </script>
 
