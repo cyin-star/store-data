@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Calculator</title>
+  <title>I don't have a good title</title>
 </head>
 <body>
 
@@ -18,7 +18,7 @@
     <br><br>
     <input type="hidden" id="d" name="d" value="1">
     <button type="submit">Calculate!</button>
-    <button type="submit">Logout</button>
+    <button type="button">Logout</button>
   </form>
   <div id="DA"></div>
   <div id="idk"></div>
@@ -74,7 +74,7 @@
 
 
 
-    dataForm.addEventListener('submit', async (event) => {
+    document.querySelector("button").addEventListener("click", () => {
       event.preventDefault(); // Prevent default form submission
       localStorage.clear();
       window.location.href="https://store-data.netlify.app";
