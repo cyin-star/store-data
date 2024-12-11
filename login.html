@@ -1,1 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Calculator</title>
+</head>
+<body>
 
+  <h1>Login To Your Account</h1>
+
+  <form id="dataForm">
+    <label for="name">Username:</label>
+    <textarea id="username" name="username"></textarea><br><br>
+
+    <label for="message">Password</label>
+    <textarea id="password" name="password"></textarea> <br><br>
+    <input type="hidden" id="d" name="d" value="1">
+    <button type="submit">login</button>
+  </form>
+  <div id="DA"></div>
+  <div id="idk"></div>
+
+  <script>
+    const dataForm = document.getElementById("dataForm");
+    const da = document.getElementById("DA");
+    const idk = document.getElementById("idk");
+
+    dataForm.addEventListener('submit', async (event) => {
+      event.preventDefault(); // Prevent default form submission
+      idk.innerHTML = "";
+      const name = document.getElementById("username").value;
+      const message = document.getElementById("password").value;
+      da.innerHTML = `logging in...`;
+      
+      const links =['https://meeatchicken.pythonanywhere.com/login']; // Sends the data to the Python server to get an output
+
+      try {
+        const responses = await Promise.all(links.map(link =>
+          fetch(link, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({name, message}) // used to be something else
+          })
+        ));
+
+        // Process the first successful response
+        const successfulResponse = responses.find(response => response.ok);
+        if (!successfulResponse) {
+          throw new Error('No successful responses from servers');
+        }
+
+        const data = await successfulResponse.json();
+        console.log('Server response:', data);
+
+        const out = data.message;
+        if (out==="unauthorized"){
+          da.innerHTML = `Please check that you have entered your username and password correctly.`;
+        }
+        else{
+          localStorage.setItem("username", name);
+          da.innerHTML = `Output: ${out}`;
+          window.location.href="https://store-data.netlify.app/register";
+        }
+      } catch (error) {
+        console.error('There has been a problem with your fetch operation:', error);
+        idk.innerHTML = `error occurred`;
+        da.innerHTML = `Message: ${error.message}`;
+      }
+    });
+  </script>
+
+</body>
+</html>
